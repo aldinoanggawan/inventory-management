@@ -1,10 +1,14 @@
 {% extends "_layout.html" %}
 {% block content %}
-{% if store_name %}
-<ul>
-    <li>Successfully added {{ store_name }}</p></li>
-</ul>
-{% endif %}
+{% with messages = get_flashed_messages() %}
+    {% if messages %}
+        <ul class=flashes>
+            {% for message in messages %}
+            <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+{% endwith %}
 <h1>Store</h1>
 <form action="{{url_for('store_verify')}}">
     <div class="form-group">
