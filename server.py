@@ -26,8 +26,8 @@ def index():
 def store():
     return render_template('store.html')
 
-@app.route("/store_create")
-def store_verify():
+@app.route("/store_create", methods=["POST"])
+def create():
     store_name = request.args.get('store_name')
     s = Store(name=store_name)
 
