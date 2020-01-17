@@ -1,0 +1,17 @@
+{% extends "_layout.html" %}
+{% block content %}
+{% if store_name %}
+<ul>
+    <li>Successfully added {{ store_name }}</p></li>
+</ul>
+{% endif %}
+<h1>Store</h1>
+<form action="{{url_for('store_verify')}}">
+    <div class="form-group">
+        <label for="store_name">Store Name:</label>
+        <input type="text" name="store_name" class="form-control" placeholder="Enter the store name here"/>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Add a store</button>
+</form>
+{% endblock %}

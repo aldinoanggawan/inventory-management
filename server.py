@@ -1,6 +1,6 @@
 import peeweedbevolve # new; must be imported before models
 from flask import Flask, render_template, request
-from models import db # new line
+from models import db, Store # new line
 
 app = Flask(__name__)
 
@@ -21,5 +21,20 @@ def migrate():
 def index():
     return render_template('index.html')
 
+@app.route("/store")
+def store():
+    return render_template('store.html')
+
+@app.route("/store_create")
+def store_verify():
+    store_name = request.args.get('store_name')
+    store = Store(name=store_name)
+    store.save()
+    return render_template('store.html', store_name=store_name)
+
+
 if __name__ == '__main__':
     app.run()
+
+# store_name = Store(name=store_name)
+#     store_name.save()
