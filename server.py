@@ -27,8 +27,8 @@ def store():
     return render_template('store.html')
 
 @app.route("/store_create", methods=["POST"])
-def create():
-    store_name = request.args.get('store_name')
+def s_create():
+    store_name = request.form.get('store_name')
     s = Store(name=store_name)
 
     if s.save():
@@ -36,7 +36,15 @@ def create():
         return redirect(url_for('store'))
     else :
         return render_template('store.html', name=store_name)
-    # return render_template('store.html', store_name=store_name)
+
+@app.route("/warehouse")
+def warehouse():
+    return render_template('warehouse.html')
+
+@app.route("/warehouse_create")
+def w_create():
+    warehouse_name = request.form.get('warehouse_name')
+    # w = Warehouse(location=warehouse_name, store=#add here)
 
 
 if __name__ == '__main__':

@@ -1,0 +1,17 @@
+{% extends "_layout.html" %}
+{% block content %}
+
+<h1>Warehouse</h1>
+<form action="" method="POST">
+    <div class="form-group">
+        <label for="warehouse_name">Warehouse Name:</label>
+        <input type="text" name="warehouse_name" class="form-control" placeholder="Enter the warehouse name here"/>
+    </div>
+    <select class="form-control">
+        <option>Default select</option>
+    </select>
+    <br>
+    <button type="submit" class="btn btn-primary">Add a warehouse</button>
+</form>
+
+{% endblock %}
