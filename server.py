@@ -1,6 +1,6 @@
 import peeweedbevolve # new; must be imported before models
 from flask import Flask, flash, render_template, request, redirect, url_for
-from models import db, Store # new line
+from models import db, Store, Warehouse # new line
 
 app = Flask(__name__)
 app.secret_key = '2klqufb3lsbcd'
@@ -39,12 +39,20 @@ def s_create():
 
 @app.route("/warehouse")
 def warehouse():
-    return render_template('warehouse.html')
+    store_list = Store.select()
+    return render_template('warehouse.html', store_list=store_list)
 
-@app.route("/warehouse_create")
+@app.route("/warehouse_create", methods=["POST"])
 def w_create():
+    store_id = Store.get_by_id(request.form.get('s_name'))
     warehouse_name = request.form.get('warehouse_name')
-    # w = Warehouse(location=warehouse_name, store=#add here)
+    w = Warehouse(location=warehouse_name, store=str(store_id))
+
+    if w.save():
+        flash(f"Successfully saved {warehouse_name}")
+        return redirect(url_for('warehouse'))
+    else:
+        return render_template('warehouse', location=warehouse_name)
 
 
 if __name__ == '__main__':
