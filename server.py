@@ -61,13 +61,25 @@ def stores():
     stores_list = Store.select()
     return render_template('stores.html', stores_list=stores_list)
 
+@app.route("/stores/<id>/delete", methods=["POST"])
+def store_delete(id):
+    s_del = Store.get_by_id(id)
+    query = Warehouse.delete().where(Warehouse.store_id == id)
+    query.execute()
+
+    if s_del.delete_instance():
+        flash(f"Successfully deleted {s_del.name}")
+        return redirect(url_for('stores'))
+    else:
+        return render_template('stores')
+
 
 @app.route("/store/<int:sid>")
 def id_store(sid):
     s = Store.get_by_id(sid)
     return render_template('sid.html', s=s)
 
-@app.route("/store/update/<storeid>", methods=["POST"])
+@app.route("/store/<storeid>/update", methods=["POST"])
 def store_update(storeid):
     s_new = Store.get_by_id(storeid)
     s_new.name = request.form.get('edit_store_name')
