@@ -4,12 +4,12 @@
 <table>
     <tr>
         <th>Stores</th>
-        <th>Warehouses</th>
+        <th>Number of Warehouses</th>
     </tr>
     <!-- put the loop of store list here -->
     {% for s in stores_list %}
     <tr>
-        <td>{{ s.name }}</td>
+        <a href="/store/{{ s.id }}"><td>{{ s.name }}</td></a>
         <td>{{ s.warehouses | length }}</td>
     </tr>
     {% endfor %}

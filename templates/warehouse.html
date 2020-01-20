@@ -15,10 +15,10 @@
         <label for="warehouse_name">Warehouse Name:</label>
         <input type="text" name="warehouse_name" class="form-control" placeholder="Enter the warehouse name here"/>
     </div>
-    <select name="s_name" class="form-control">
+    <select name="s_id" class="form-control">
         <option disabled selected value> --- Select the store --- </option>
         {% for s in store_list %}
-            <option name="s_name" value="{{ s.id }}">{{ s.name }}</option>
+            <option value="{{ s.id }}">{{ s.name }}</option>
         {% endfor %}
     </select>
     <br>

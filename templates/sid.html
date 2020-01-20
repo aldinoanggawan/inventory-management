@@ -1,7 +1,25 @@
 {% extends "_layout.html" %}
 {% block content %}
+{% with messages = get_flashed_messages() %}
+    {% if messages %}
+        <ul class="flashes">
+            {% for message in messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+{% endwith %}
 <h1>{{ s.name }}</h1>
 <br>
 <p>Number of warehouses</p>
 <p>{{ s.warehouses | length }}</p>
+
+<form action="{{ url_for('store_update', storeid=s.id)}}" method="POST">
+    <div class="form-group">
+        <label for="edit_store_name">Store Name:</label>
+        <input type="text" name="edit_store_name" class="form-control" placeholder="Enter the new store name here"/>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Update Store</button>
+</form>
 {% endblock %}

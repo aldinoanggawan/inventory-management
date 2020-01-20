@@ -45,9 +45,9 @@ def warehouse():
 
 @app.route("/warehouse_create", methods=["POST"])
 def w_create():
-    store_id = Store.get_by_id(request.form.get('s_name'))
+    store_id = Store.get_by_id(request.form.get('s_id'))
     warehouse_name = request.form.get('warehouse_name')
-    w = Warehouse(location=warehouse_name, store=str(store_id))
+    w = Warehouse(location=warehouse_name, store=store_id)
 
     if w.save():
         flash(f"Successfully saved {warehouse_name}")
@@ -62,10 +62,21 @@ def stores():
     return render_template('stores.html', stores_list=stores_list)
 
 
-@app.route("/store/<sid>")
+@app.route("/store/<int:sid>")
 def id_store(sid):
     s = Store.get_by_id(sid)
     return render_template('sid.html', s=s)
+
+@app.route("/store/update/<storeid>", methods=["POST"])
+def store_update(storeid):
+    s_new = Store.get_by_id(storeid)
+    s_new.name = request.form.get('edit_store_name')
+
+    if s_new.save():
+        flash(f"Successfully saved {s_new.name}")
+        return redirect(url_for('id_store', sid=storeid))
+    else:
+        return render_template('id_store')
 
 if __name__ == '__main__':
     app.run()
