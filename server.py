@@ -37,6 +37,7 @@ def s_create():
     else :
         return render_template('store.html', name=store_name)
 
+
 @app.route("/warehouse")
 def warehouse():
     store_list = Store.select()
@@ -54,6 +55,17 @@ def w_create():
     else:
         return render_template('warehouse', location=warehouse_name)
 
+
+@app.route("/stores")
+def stores():
+    stores_list = Store.select()
+    return render_template('stores.html', stores_list=stores_list)
+
+
+@app.route("/store/<sid>")
+def id_store(sid):
+    s = Store.get_by_id(sid)
+    return render_template('sid.html', s=s)
 
 if __name__ == '__main__':
     app.run()

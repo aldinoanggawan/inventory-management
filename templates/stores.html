@@ -1,0 +1,17 @@
+{% extends "_layout.html" %}
+{% block content %}
+<h1>Stores</h1>
+<table>
+    <tr>
+        <th>Stores</th>
+        <th>Warehouses</th>
+    </tr>
+    <!-- put the loop of store list here -->
+    {% for s in stores_list %}
+    <tr>
+        <td>{{ s.name }}</td>
+        <td>{{ s.warehouses | length }}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}
