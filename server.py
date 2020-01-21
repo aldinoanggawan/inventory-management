@@ -35,7 +35,7 @@ def s_create():
         flash(f"Successfully saved {store_name}")
         return redirect(url_for('store'))
     else :
-        return render_template('store.html', name=store_name)
+        return render_template('store.html', name=store_name, errors=s.errors)
 
 
 @app.route("/warehouse")
