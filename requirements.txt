@@ -9,4 +9,4 @@ peewee==3.13.1
 peewee-db-evolve==3.7.3
 psycopg2-binary==2.8.4
 python-dotenv==0.10.3
-Werkzeug==0.16.0
+Werkzeug==2.2.3
